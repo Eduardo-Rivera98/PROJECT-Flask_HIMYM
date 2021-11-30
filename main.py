@@ -1,10 +1,15 @@
 from flask import Flask, request
 import src.SQLtools as sql
 from flask import jsonify
-
-
+import markdown.extensions.fenced_code
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    readme_file = open("InfoAPI.md")
+    template = markdown.markdown(readme_file.read(), extensions = ["fenced_code"])
+    return template
 
 @app.route("/frasesbycharacter/<nombre>")
 def phrase_by_char(nombre):

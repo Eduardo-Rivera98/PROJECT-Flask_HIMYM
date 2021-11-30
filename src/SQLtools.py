@@ -12,10 +12,7 @@ from nltk.corpus import stopwords
 def tokenizer(txt):
     """
     Transforms a text, taking out meaningless words, and converting the rest to its original form 
-    Args:
-        txt: any text
-    Returns:
-        A list with the tokenized words
+    
     """
     nlp = spacy.load("en_core_web_sm")
     tokens = nlp(txt)
@@ -33,10 +30,7 @@ def tokenizer(txt):
 def polarity(frase):
     """
     Gets the sentiment of a phrase 
-    Args:
-        A phrase
-    Returns:
-        A measure of positiveness or negativeness of the phrase using TextBlob
+    
     """
 
     blob = TextBlob(f"{frase}")
@@ -45,8 +39,7 @@ def polarity(frase):
 
 def check(que,string):
     """
-    Función parametrizada que comprueba en cada tabla si existe el user, artista o canción.
-    Devuelve True si existe y False si no
+    
     """
     if que== 'personaje':
         query =list(engine.execute(f"SELECT Nombre FROM personaje WHERE Nombre = '{string}'"))
@@ -76,10 +69,7 @@ def check(que,string):
 def frasecita(personaje):
     """
     Query the db for existence of a character and returns all its phrases 
-    Args:
-        character: name of the character
-    Returns:
-        A json format dataframe with all the phrases from that character.
+    
     """
 
     if check('personaje', personaje):
@@ -148,11 +138,7 @@ def nuevomensaje(frase,personaje, Temporada, episodio):
 def quote_sent(personaje, episodio):
     """
     Gets the sentiment of a phrase in the database, for an especific character and episode
-    Args:
-        character: name of the character
-        episode: name of the episode
-    Returns:
-        A list with the measures of positivness or negativness for the phrases
+    
     """
     query = list(engine.execute(f"SELECT idPersonaje FROM personaje WHERE `Nombre` = '{personaje}'"))
     c = query[0][0]
